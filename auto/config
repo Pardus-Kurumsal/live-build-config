@@ -4,18 +4,18 @@ set -e
 set -o pipefail # Bashism
 
 # You can put local mirrors here if you want
-kali_mirror=http://archive.kali.org/kali
-kalisec_mirror=http://archive.kali.org/kali-security
+pardus_mirror=http://10.10.20.13:33333/pardus
+pardussec_mirror=http://10.10.20.13:33333/pardus
 
 ### DO NOT EDIT THE REST OF THIS FILE ###
 
-public_kali_mirror=http://http.kali.org/kali
-public_kalisec_mirror=http://security.kali.org/kali-security
+public_pardus_mirror=http://10.10.20.13:33333/pardus
+public_pardussec_mirror=http://10.10.20.13/pardus
 
 # Detect target architecture and filter args
 temp=""
 arch=$(dpkg --print-architecture)
-dist="kali-rolling"
+dist="pardus-devel"
 lb_opts=""
 while [ $# -gt 0 ]; do
    	arg="$1"
@@ -52,10 +52,10 @@ done
 eval set -- "$temp"
 
 # Resolve release name
-dist=$(curl -s $kali_mirror/dists/$dist/Release | awk '/^Codename:/ {print $2}')
+dist=$(curl -s $pardus_mirror/dists/$dist/Release | awk '/^Codename:/ {print $2}')
 
 # live-build doesn't work if --parent-debian-distribution is unknown of
-# debian-cd => we have to put a symlink so that it deals with kali like sid
+# debian-cd => we have to put a symlink so that it deals with pardus like sid
 if [ ! -e ${LIVE_BUILD:-/usr/share/live/build}/data/debian-cd/$dist ]; then
 	if [ -w ${LIVE_BUILD:-/usr/share/live/build}/data/debian-cd ]; then
 		ln -sf sid ${LIVE_BUILD:-/usr/share/live/build}/data/debian-cd/$dist
@@ -85,8 +85,8 @@ esac
 # Define options that vary across releases
 case "$dist" in
     sana)
-	lb_opts="$lb_opts --mirror-chroot-security $kalisec_mirror"
-	lb_opts="$lb_opts --mirror-binary-security $public_kalisec_mirror"
+	lb_opts="$lb_opts --mirror-chroot-security $pardussec_mirror"
+	lb_opts="$lb_opts --mirror-binary-security $public_pardussec_mirror"
     ;;
     *)
 	lb_opts="$lb_opts --security false"
@@ -96,44 +96,44 @@ esac
 # Setup configuration files from variant and options
 
 # Drop all files that a former run might have put into place
-for file in $(cd kali-config && find . -type f); do
+for file in $(cd pardus-config && find . -type f); do
     file=${file#./*/}
     rm -f config/$file
 done
-rm -f config/archives/kali-proposed-updates.list.*
+rm -f config/archives/pardus-proposed-updates.list.*
 
-# Copy over all files from official kali configuration
-cp -rT kali-config/common config
-[ ! -d kali-config/release-$dist ] || cp -rTL kali-config/release-$dist config
-[ ! -d kali-config/variant-$variant ] || cp -rTL kali-config/variant-$variant config
+# Copy over all files from official pardus configuration
+cp -rT pardus-config/common config
+[ ! -d pardus-config/release-$dist ] || cp -rTL pardus-config/release-$dist config
+[ ! -d pardus-config/variant-$variant ] || cp -rTL pardus-config/variant-$variant config
 
 if [ -n "$enable_pu" ]; then
 	mkdir -p config/archives
-	echo "deb $kali_mirror $dist-proposed-updates main contrib non-free" \
-		> config/archives/kali-proposed-updates.list.chroot
-	echo "deb $public_kali_mirror $dist-proposed-updates main contrib non-free" \
-		> config/archives/kali-proposed-updates.list.binary
+	echo "deb $pardus_mirror $dist-proposed-updates main contrib non-free" \
+		> config/archives/pardus-proposed-updates.list.chroot
+	echo "deb $public_pardus_mirror $dist-proposed-updates main contrib non-free" \
+		> config/archives/pardus-proposed-updates.list.binary
 fi
 
 lb config noauto \
 	--distribution "$dist" \
 	--debian-installer-distribution "$dist" \
 	--archive-areas "main contrib non-free" \
-	--debootstrap-options "--keyring=/usr/share/keyrings/kali-archive-keyring.gpg" \
-	--keyring-packages kali-archive-keyring \
+	--debootstrap-options "--keyring=/usr/share/keyrings/pardus-archive-keyring.gpg" \
+	--keyring-packages pardus-archive-keyring \
 	--updates false \
 	--backports false \
 	--source false \
 	--firmware-binary true \
 	--firmware-chroot true \
-	--mirror-bootstrap "$kali_mirror" \
-	--mirror-debian-installer "$kali_mirror" \
-	--mirror-binary "$public_kali_mirror" \
-	--iso-application "Kali Linux" \
-	--iso-publisher "Kali" \
-	--iso-volume "Kali Live" \
+	--mirror-bootstrap "$pardus_mirror" \
+	--mirror-debian-installer "$pardus_mirror" \
+	--mirror-binary "$public_pardus_mirror" \
+	--iso-application "Pardus" \
+	--iso-publisher "Pardus" \
+	--iso-volume "Pardus Live" \
 	--linux-packages linux-image \
 	--memtest memtest86 \
-	--bootappend-live "boot=live username=root hostname=kali" \
+	--bootappend-live "boot=live username=root hostname=pardus" \
 	$lb_opts \
 	"$@"

@@ -1,0 +1,9 @@
+build:
+  image: pardus/pardus-devel
+  privileged: true
+  volumes:
+    - /var/dockers/images:/var/images
+  commands:
+    - apt-get update
+    - apt-get install curl live-build
+    - ./build.sh --distribution pardus-devel --variant light --verbose
