@@ -3,14 +3,15 @@
 set -e
 set -o pipefail  # Bashism
 
-PARDUS_DIST="pardus-rolling"
-PARDUS_VERSION=""
+PARDUS_DIST="pardus-devel"
 PARDUS_VARIANT="default"
+PARDUS_VERSION=""
 TARGET_DIR="/var/images"
 TARGET_SUBDIR=""
 SUDO="sudo"
 VERBOSE=""
 HOST_ARCH=$(dpkg --print-architecture)
+TIMESTAMP=$(date +"%Y%m%d%H%M")
 
 image_name() {
 	local arch=$1
@@ -35,9 +36,9 @@ target_image_name() {
 		IMAGE_EXT="img"
 	fi
 	if [ "$PARDUS_VARIANT" = "default" ]; then
-		echo "${TARGET_SUBDIR:+$TARGET_SUBDIR/}pardus-$PARDUS_VERSION-$PARDUS_ARCH.$IMAGE_EXT"
+		echo "${TARGET_SUBDIR:+$TARGET_SUBDIR/}pardus-$PARDUS_VERSION-$PARDUS_ARCH-$TIMESTAMP.$IMAGE_EXT"
 	else
-		echo "${TARGET_SUBDIR:+$TARGET_SUBDIR/}pardus-$PARDUS_VARIANT-$PARDUS_VERSION-$PARDUS_ARCH.$IMAGE_EXT"
+		echo "${TARGET_SUBDIR:+$TARGET_SUBDIR/}pardus-$PARDUS_VARIANT-$PARDUS_VERSION-$PARDUS_ARCH-$TIMESTAMP.$IMAGE_EXT"
 	fi
 }
 
@@ -171,6 +172,7 @@ cd $(dirname $0)
 mkdir -p $TARGET_DIR/$TARGET_SUBDIR
 
 for PARDUS_ARCH in $PARDUS_ARCHES; do
+  echo "Building $(target_image_name $PARDUS_ARCH)"
 	IMAGE_NAME="$(image_name $PARDUS_ARCH)"
 	set +e
 	: > build.log
@@ -183,6 +185,6 @@ for PARDUS_ARCH in $PARDUS_ARCHES; do
 		failure
 	fi
 	set -e
-	mv -f $IMAGE_NAME $TARGET_DIR/$(date +"%Y%m%d%H%M")-$(target_image_name $PARDUS_ARCH)
-	mv -f build.log $TARGET_DIR/$(date +"%Y%m%d%H%M")-$(target_build_log $PARDUS_ARCH)
+	mv -f $IMAGE_NAME $TARGET_DIR/$(target_image_name $PARDUS_ARCH)
+	mv -f build.log $TARGET_DIR/$(target_build_log $PARDUS_ARCH)
 done
