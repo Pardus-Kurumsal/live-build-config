@@ -14,14 +14,6 @@
 # echo > /etc/udev/rules.d/73-special-net-names.rules
 # update-initramfs -u
 
-if [ -f "/etc/default/grub" ]; then
-	echo "Changing grub file"
-	sed -i -e 's/^GRUB_CMDLINE_LINUX_DEFAULT.*/GRUB_CMDLINE_LINUX_DEFAULT=\"quiet splash fbcon=vc:2\"/g' /etc/default/grub
-	update-grub
-else
-	echo "grub file does not exists under /etc/default"
-fi
-
 if [ -f "/etc/plymouth/plymouthd.conf" ]; then
 	echo "Changing plymouthd.conf"
 	echo "[Daemon]\nTheme=runner" > /etc/plymouth/plymouthd.conf
