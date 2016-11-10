@@ -14,15 +14,6 @@
 # echo > /etc/udev/rules.d/73-special-net-names.rules
 # update-initramfs -u
 
-if [ -f "/etc/apt/sources.list" ]; then
-	echo "Changing /etc/apt/sources.list"
-	echo "deb http://10.10.20.13:33333/pardus pardus-devel main\n\
-	deb-src http://10.10.20.13:33333/pardus pardus-devel main" > /etc/apt/sources.list
-	update-initramfs -u
-else
-	echo "sources.list file does not exists under /etc/apt"
-fi
-
 if [ -f "/etc/plymouth/plymouthd.conf" ]; then
 	echo "Changing plymouthd.conf"
 	echo "[Daemon]\nTheme=runner" > /etc/plymouth/plymouthd.conf
