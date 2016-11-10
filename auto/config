@@ -10,7 +10,7 @@ pardussec_mirror=http://10.10.20.13:33333/pardus
 ### DO NOT EDIT THE REST OF THIS FILE ###
 
 public_pardus_mirror=http://10.10.20.13:33333/pardus
-public_pardussec_mirror=http://10.10.20.13/pardus
+public_pardussec_mirror=http://10.10.20.13:33333/pardus
 
 # Detect target architecture and filter args
 temp=""
