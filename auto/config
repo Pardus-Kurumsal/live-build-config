@@ -84,7 +84,7 @@ esac
 
 # Define options that vary across releases
 case "$dist" in
-    sana)
+    pardus)
 	lb_opts="$lb_opts --mirror-chroot-security $pardussec_mirror"
 	lb_opts="$lb_opts --mirror-binary-security $public_pardussec_mirror"
     ;;
@@ -114,6 +114,13 @@ if [ -n "$enable_pu" ]; then
 	echo "deb $public_pardus_mirror $dist-proposed-updates main contrib non-free" \
 		> config/archives/pardus-proposed-updates.list.binary
 fi
+
+
+mkdir -p config/archives
+echo "deb $pardus_mirror $dist main contrib non-free" \
+		 > config/archives/pardus-proposed-updates.list.chroot
+echo "deb $public_pardus_mirror $dist main contrib non-free" \
+		 > config/archives/pardus-proposed-updates.list.binary
 
 lb config noauto \
 	--distribution "$dist" \
