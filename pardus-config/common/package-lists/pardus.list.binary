@@ -9,6 +9,3 @@ grub-efi-ia32
 grub-efi
 grub-efi-amd64
 #endif
-
-# EFI won't install without vfat
-dosfstools
