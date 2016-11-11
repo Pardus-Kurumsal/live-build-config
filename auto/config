@@ -116,12 +116,6 @@ if [ -n "$enable_pu" ]; then
 fi
 
 
-mkdir -p config/archives
-echo "deb $pardus_mirror $dist main contrib non-free" \
-		 > config/archives/pardus-proposed-updates.list.chroot
-echo "deb $public_pardus_mirror $dist main contrib non-free" \
-		 > config/archives/pardus-proposed-updates.list.binary
-
 lb config noauto \
 	--distribution "$dist" \
 	--debian-installer-distribution "$dist" \
@@ -141,6 +135,6 @@ lb config noauto \
 	--iso-volume "Pardus Live" \
 	--linux-packages linux-image \
 	--memtest memtest86 \
-	--bootappend-live "boot=live username=root hostname=pardus" \
+  --bootappend-live "boot=live config username=root hostname=pardus locales=tr_TR.UTF-8,en_US.UTF-8 keyboard-layouts=tr keyboard-model=pc105" \
 	$lb_opts \
 	"$@"
