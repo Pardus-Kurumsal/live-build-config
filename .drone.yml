@@ -3,6 +3,7 @@ build:
   privileged: true
   volumes:
     - /var/dockers/images:/var/images
+    - /etc/localtime:/etc/localtime:ro
   commands:
     - apt-get update
     - apt-get install curl live-build
