@@ -13,6 +13,27 @@ VERBOSE=""
 HOST_ARCH=$(dpkg --print-architecture)
 TIMESTAMP=$(date +"%Y%m%d%H%M")
 
+bin_exits() {
+	hash $1 2>/dev/null
+}
+
+scm_version() {
+	local head=""
+
+	if ! bin_exits git; then
+		return
+	fi
+
+	if test -z "$(git rev-parse --show-cdup 2>/dev/null)" &&
+		head=`git rev-parse --verify --short HEAD 2>/dev/null`; then
+		printf '%s%s' -g $head
+
+		if [ -n "$(git diff-index --name-only HEAD)" ]; then
+			printf '%s\n' +
+		fi
+	fi
+}
+
 image_name() {
 	local arch=$1
 
@@ -29,6 +50,7 @@ image_name() {
 
 target_image_name() {
 	local arch=$1
+	local scm_v=$(scm_version)
 
 	IMAGE_NAME="$(image_name $arch)"
 	IMAGE_EXT="${IMAGE_NAME##*.}"
@@ -36,9 +58,9 @@ target_image_name() {
 		IMAGE_EXT="img"
 	fi
 	if [ "$PARDUS_VARIANT" = "default" ]; then
-		echo "${TARGET_SUBDIR:+$TARGET_SUBDIR/}pardus-$PARDUS_VERSION-$PARDUS_ARCH-$TIMESTAMP.$IMAGE_EXT"
+		echo "${TARGET_SUBDIR:+$TARGET_SUBDIR/}pardus-$PARDUS_VERSION-$PARDUS_ARCH-$TIMESTAMP$scm_v.$IMAGE_EXT"
 	else
-		echo "${TARGET_SUBDIR:+$TARGET_SUBDIR/}pardus-$PARDUS_VARIANT-$PARDUS_VERSION-$PARDUS_ARCH-$TIMESTAMP.$IMAGE_EXT"
+		echo "${TARGET_SUBDIR:+$TARGET_SUBDIR/}pardus-$PARDUS_VARIANT-$PARDUS_VERSION-$PARDUS_ARCH-$TIMESTAMP$scm_v.$IMAGE_EXT"
 	fi
 }
 
