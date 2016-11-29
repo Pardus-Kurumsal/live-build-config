@@ -17,7 +17,6 @@
 if [ -f "/etc/plymouth/plymouthd.conf" ]; then
 	echo "Changing plymouthd.conf"
 	echo "[Daemon]\nTheme=runner" > /etc/plymouth/plymouthd.conf
-	update-initramfs -u
 else
 	echo "plymouth conf file does not exists under /etc/plymouth"
 fi
