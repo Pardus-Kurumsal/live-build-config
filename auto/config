@@ -115,7 +115,6 @@ if [ -n "$enable_pu" ]; then
 		> config/archives/pardus-proposed-updates.list.binary
 fi
 
-
 lb config noauto \
 	--distribution "$dist" \
 	--debian-installer-distribution "$dist" \
@@ -135,6 +134,5 @@ lb config noauto \
 	--iso-volume "Pardus Live" \
 	--linux-packages linux-image \
 	--memtest memtest86 \
-  --bootappend-live "boot=live config username=root hostname=pardus locales=tr_TR.UTF-8,en_US.UTF-8 keyboard-layouts=tr keyboard-model=pc105" \
 	$lb_opts \
 	"$@"
