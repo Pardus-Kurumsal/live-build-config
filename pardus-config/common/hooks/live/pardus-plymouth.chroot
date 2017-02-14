@@ -7,3 +7,4 @@ else
 	echo "plymouth conf file does not exists under /etc/plymouth"
 fi
 
+

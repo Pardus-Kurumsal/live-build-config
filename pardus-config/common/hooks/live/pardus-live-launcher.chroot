@@ -1,0 +1,14 @@
+#!/bin/sh
+
+if [ -f "/usr/share/applications/debian-installer-launcher.desktop" ]; then
+	if [ -f "/usr/share/applications/debian-installer-launcher.desktop" ]; then
+		echo "Adding live installer launcher into live user desktop"
+		cp -Rf /usr/share/applications/debian-installer-launcher.desktop /home/pardus/Masaüstü/debian-installer-launcher.desktop
+		chmod 755 /home/pardus/Masaüstü/debian-installer-launcher.desktop
+	else
+		echo "Could not find the live user home directory to copy live installer launcher"
+	fi	
+else
+	echo "live installer launcher file does not exists under /usr/share/applications/"
+fi
+
