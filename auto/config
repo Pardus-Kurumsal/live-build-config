@@ -4,13 +4,13 @@ set -e
 set -o pipefail # Bashism
 
 # You can put local mirrors here if you want
-pardus_mirror=http://161.9.194.174:33333/pardus
-pardussec_mirror=http://161.9.194.174:33333/pardus
+pardus_mirror=http://depo.pardus.org.tr/pardus
+pardussec_mirror=http://depo.pardus.org.tr/pardus
 
 ### DO NOT EDIT THE REST OF THIS FILE ###
 
-public_pardus_mirror=http://161.9.194.174:33333/pardus
-public_pardussec_mirror=http://161.9.194.174:33333/pardus
+public_pardus_mirror=http://depo.pardus.org.tr/pardus
+public_pardussec_mirror=http://depo.pardus.org.tr/pardus
 
 # Detect target architecture and filter args
 temp=""
