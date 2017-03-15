@@ -9,12 +9,12 @@ case $1 in
 	#This is for root
 	gsettings set org.gnome.desktop.media-handling automount-open false
 	#This is for live user
-	su - pardus
-	gsettings set org.gnome.desktop.media-handling automount-open false
+	sudo -u pardus gsettings set org.gnome.desktop.media-handling automount-open false
+	sudo -u pardus gsettings set org.gnome.desktop.media-handling automount false
     ;;
     cleanup)
 	gsettings reset org.gnome.desktop.media-handling automount-open
-	su - pardus
-	gsettings reset org.gnome.desktop.media-handling automount-open
+	sudo -u pardus gsettings reset org.gnome.desktop.media-handling automount-open
+	sudo -u pardus gsettings reset org.gnome.desktop.media-handling automount
     ;;
 esac
