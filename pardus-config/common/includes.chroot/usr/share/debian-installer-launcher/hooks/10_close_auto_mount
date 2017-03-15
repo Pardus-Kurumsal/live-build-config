@@ -7,12 +7,14 @@ fi
 case $1 in
     startup)
 	#This is for root
+	gsettings set org.gnome.desktop.media-handling automount false
 	gsettings set org.gnome.desktop.media-handling automount-open false
 	#This is for live user
 	sudo -u pardus gsettings set org.gnome.desktop.media-handling automount-open false
 	sudo -u pardus gsettings set org.gnome.desktop.media-handling automount false
     ;;
     cleanup)
+	gsettings reset org.gnome.desktop.media-handling automount
 	gsettings reset org.gnome.desktop.media-handling automount-open
 	sudo -u pardus gsettings reset org.gnome.desktop.media-handling automount-open
 	sudo -u pardus gsettings reset org.gnome.desktop.media-handling automount
