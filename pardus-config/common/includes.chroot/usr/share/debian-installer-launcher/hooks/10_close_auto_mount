@@ -6,9 +6,15 @@ fi
 
 case $1 in
     startup)
+	#This is for root
+	gsettings set org.gnome.desktop.media-handling automount-open false
+	#This is for live user
+	su - pardus
 	gsettings set org.gnome.desktop.media-handling automount-open false
     ;;
     cleanup)
+	gsettings reset org.gnome.desktop.media-handling automount-open
+	su - pardus
 	gsettings reset org.gnome.desktop.media-handling automount-open
     ;;
 esac
