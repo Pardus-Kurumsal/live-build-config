@@ -3,7 +3,7 @@
 set -e
 set -o pipefail  # Bashism
 
-PARDUS_DIST="pardus-devel"
+PARDUS_DIST="onyedi"
 PARDUS_VARIANT="default"
 PARDUS_VERSION=""
 TARGET_DIR="/var/images"

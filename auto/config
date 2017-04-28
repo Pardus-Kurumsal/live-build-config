@@ -15,7 +15,7 @@ public_pardussec_mirror=http://depo.pardus.org.tr/pardus
 # Detect target architecture and filter args
 temp=""
 arch=$(dpkg --print-architecture)
-dist="pardus-devel"
+dist="onyedi"
 lb_opts=""
 while [ $# -gt 0 ]; do
    	arg="$1"

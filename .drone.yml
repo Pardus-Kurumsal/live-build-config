@@ -7,4 +7,4 @@ build:
   commands:
     - apt-get update
     - apt-get install curl live-build
-    - ./build.sh --distribution pardus-devel --variant light --verbose
+    - ./build.sh --distribution onyedi --variant light --verbose
