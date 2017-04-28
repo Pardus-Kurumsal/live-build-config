@@ -1,5 +1,5 @@
 build:
-  image: pardus/pardus-devel
+  image: pardus:onyedi
   privileged: true
   volumes:
     - /var/dockers/images:/var/images
