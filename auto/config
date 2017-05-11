@@ -3,6 +3,10 @@
 set -e
 set -o pipefail # Bashism
 
+#ISO volume name that will be appeared when the image is
+#burned into a drive
+pardus_iso_volume_name="Pardus 17 Calisan"
+
 # You can put local mirrors here if you want
 pardus_mirror=http://depo.pardus.org.tr/pardus
 pardussec_mirror=http://depo.pardus.org.tr/pardus
@@ -131,7 +135,7 @@ lb config noauto \
 	--mirror-binary "$public_pardus_mirror" \
 	--iso-application "Pardus" \
 	--iso-publisher "Pardus" \
-	--iso-volume "Pardus Live" \
+	--iso-volume "$pardus_iso_volume_name" \
 	--linux-packages linux-image \
 	--memtest memtest86 \
 	$lb_opts \
