@@ -93,7 +93,7 @@ case "$dist" in
 	lb_opts="$lb_opts --mirror-binary-security $public_pardussec_mirror"
     ;;
     *)
-	lb_opts="$lb_opts --security false"
+	lb_opts="$lb_opts --security true"
     ;;
 esac
 
