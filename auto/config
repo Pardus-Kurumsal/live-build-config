@@ -88,12 +88,12 @@ esac
 
 # Define options that vary across releases
 case "$dist" in
-    pardus)
+    onyedi)
 	lb_opts="$lb_opts --mirror-chroot-security $pardussec_mirror"
 	lb_opts="$lb_opts --mirror-binary-security $public_pardussec_mirror"
     ;;
     *)
-	lb_opts="$lb_opts --security true"
+	lb_opts="$lb_opts --security false"
     ;;
 esac
 
