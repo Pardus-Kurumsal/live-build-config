@@ -9,12 +9,12 @@ pardus_iso_volume_name="Pardus 17 Calisan"
 
 # You can put local mirrors here if you want
 pardus_mirror=http://depo.pardus.org.tr/pardus
-pardussec_mirror=http://depo.pardus.org.tr/pardus
+pardussec_mirror=http://depo.pardus.org.tr/guvenlik
 
 ### DO NOT EDIT THE REST OF THIS FILE ###
 
 public_pardus_mirror=http://depo.pardus.org.tr/pardus
-public_pardussec_mirror=http://depo.pardus.org.tr/pardus
+public_pardussec_mirror=http://depo.pardus.org.tr/guvenlik
 
 # Detect target architecture and filter args
 temp=""
