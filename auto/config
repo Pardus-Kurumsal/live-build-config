@@ -5,7 +5,7 @@ set -o pipefail # Bashism
 
 #ISO volume name that will be appeared when the image is
 #burned into a drive
-pardus_iso_volume_name="Pardus 17 Calisan"
+pardus_iso_volume_name="Pardus 17.1 Calisan"
 
 # You can put local mirrors here if you want
 pardus_mirror=http://depo.pardus.org.tr/pardus
