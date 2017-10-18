@@ -4,7 +4,7 @@ set -e
 set -o pipefail  # Bashism
 
 PARDUS_DIST="onyedi"
-PARDUS_VARIANT="XFCE"
+PARDUS_VARIANT="xfce"
 PARDUS_VERSION="17.1"
 TARGET_DIR="/var/images"
 TARGET_SUBDIR=""
